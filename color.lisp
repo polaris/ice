@@ -19,7 +19,7 @@
       (3d-vectors:vec r g b))))
 
 (defun write-pixel-color (out pixel-color)
-  (format out "~d ~d ~d~%"
-	  (round (3d-vectors:vx pixel-color))
-	  (round (3d-vectors:vy pixel-color))
-	  (round (3d-vectors:vz pixel-color))))
+  (let ((ir (round (* 255.999 (3d-vectors:vx pixel-color))))
+	(ig (round (* 255.999 (3d-vectors:vy pixel-color))))
+	(ib (round (* 255.999 (3d-vectors:vz pixel-color)))))
+  (format out "~d ~d ~d~%" ir ig ib)))

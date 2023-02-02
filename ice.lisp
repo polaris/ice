@@ -14,7 +14,4 @@
 		     do (let ((r (/ i (- image-width 1)))
 			      (g (/ j (- image-height 1)))
 			      (b 0.25))
-			  (let ((ir (round (* 255.999 r)))
-				(ig (round (* 255.999 g)))
-				(ib (round (* 255.999 b))))
-			    (write-pixel-color output (3d-vectors:vec ir ig ib)))))))))
+			  (write-pixel-color output (3d-vectors:vec r g b))))))))
