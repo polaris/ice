@@ -6,12 +6,12 @@
   :license  "MIT"
   :version "0.0.1"
   :serial t
-  :depends-on (#:clerk
-               #:inferior-shell
-               #:trivial-clipboard
+  :depends-on (#:3d-vectors
                #:fiveam)
   :components ((:file "package")
-               (:file "ice"))
+               (:file "ice")
+	       (:file "color")
+	       (:file "helper"))
   :in-order-to ((test-op (test-op "ice/tests"))))
 
 (asdf:defsystem #:ice/tests
@@ -20,6 +20,7 @@
   :components ((:module "tests"
 		:serial t
 		:components ((:file "package")
-			     (:file "main"))))
+			     (:file "main")
+			     (:file "color"))))
   :perform (test-op (o c)
 		    (uiop:symbol-call '#:fiveam '#:run! :ice/tests)))

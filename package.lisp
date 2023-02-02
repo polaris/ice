@@ -1,4 +1,5 @@
 ;;;; package.lisp
 
 (defpackage #:ice
-  (:use #:cl))
+  (:use #:cl)
+  (:export #:render))
