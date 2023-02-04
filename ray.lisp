@@ -10,5 +10,5 @@
     :initarg :direction
     :reader get-direction)))
 
-(defmethod at (r tt)
+(defmethod at ((r ray) (tt number))
   (3d-vectors:v+ (get-origin r) (3d-vectors:v* (get-direction r) tt)))
