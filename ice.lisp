@@ -2,10 +2,20 @@
 
 (in-package #:ice)
 
+(defun hit-shpere (center radius r)
+  (let* ((oc (3d-vectors:v- (get-origin r) center))
+	 (a (3d-vectors:v. (get-direction r) (get-direction r)))
+	 (b (* 2.0 (3d-vectors:v. oc (get-direction r))))
+	 (c (- (3d-vectors:v. oc oc) (* radius radius)))
+	 (discriminant (- (* b b) (* 4 a c))))
+    (> discriminant 0)))
+
 (defun ray-color (r)
-  (let ((unit-direction (3d-vectors:vunit (get-direction r))))
-    (let ((tt (* 0.5 (+ (3d-vectors:vy unit-direction) 1))))
-      (3d-vectors:v+ (3d-vectors:v* (- 1.0 tt) (3d-vectors:vec 1 1 1)) (3d-vectors:v* tt (3d-vectors:vec 0.5 0.7 1.0))))))
+  (if (hit-sphere (3d-vectors:vec 0 0 -1) 0.5 r)
+      (3d-vectors:vec 1 0 0)
+      (let ((unit-direction (3d-vectors:vunit (get-direction r))))
+	(let ((tt (* 0.5 (+ (3d-vectors:vy unit-direction) 1))))
+	  (3d-vectors:v+ (3d-vectors:v* (- 1.0 tt) (3d-vectors:vec 1 1 1)) (3d-vectors:v* tt (3d-vectors:vec 0.5 0.7 1.0)))))))
 
 (defun render (filename image-width)
   (let* ((aspect-ratio (/ 16.0 9.0))
