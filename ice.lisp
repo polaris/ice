@@ -4,13 +4,13 @@
 
 (defun hit-sphere (center radius r)
   (let* ((oc (3d-vectors:v- (get-origin r) center))
-	 (a (3d-vectors:v. (get-direction r) (get-direction r)))
-	 (b (* 2.0 (3d-vectors:v. oc (get-direction r))))
-	 (c (- (3d-vectors:v. oc oc) (* radius radius)))
-	 (discriminant (- (* b b) (* 4 a c))))
+	 (a (3d-vectors:vsqrlength (get-direction r)))
+	 (half-b (3d-vectors:v. oc (get-direction r)))
+	 (c (- (3d-vectors:vsqrlength oc) (* radius radius)))
+	 (discriminant (- (* half-b half-b) (* a c))))
     (if (< discriminant 0)
 	-1
-	(/ (- (- b) (sqrt discriminant)) (* 2.0 a)))))
+	(/ (- (- half-b) (sqrt discriminant)) a))))
 
 (defun ray-color (r)
   (let ((tt (hit-sphere (3d-vectors:vec 0 0 -1) 0.5 r)))
