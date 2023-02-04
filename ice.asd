@@ -11,6 +11,7 @@
   :components ((:file "package")
                (:file "ice")
 	       (:file "color")
+	       (:file "ray")
 	       (:file "helper"))
   :in-order-to ((test-op (test-op "ice/tests"))))
 
@@ -21,6 +22,7 @@
 		:serial t
 		:components ((:file "package")
 			     (:file "main")
+			     (:file "ray")
 			     (:file "color"))))
   :perform (test-op (o c)
 		    (uiop:symbol-call '#:fiveam '#:run! :ice/tests)))
