@@ -29,7 +29,7 @@
     (if (< discriminant 0)
         nil
         (let ((root (calc-root discriminant half-b a t-min t-max)))
-          (if (eq root nil)
+          (if (null root)
               nil
               (let* ((point (at r root))
                      (outward-normal (v/ (v- point (get-center s)) (get-radius s)))
