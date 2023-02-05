@@ -16,7 +16,7 @@
          (r (floor (* 255.999 (vx corrected-pixel-color))))
          (g (floor (* 255.999 (vy corrected-pixel-color))))
          (b (floor (* 255.999 (vz corrected-pixel-color)))))
-    (vec r g b))))
+    (vec r g b)))
 
 (defun write-pixel-color (out pixel-color)
   (let ((ir (floor (* 255.999 (vx pixel-color))))
