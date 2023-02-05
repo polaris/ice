@@ -26,13 +26,12 @@
                             :direction :output
                             :if-does-not-exist :create
                             :if-exists :overwrite)
-      (progn
-       (format output "P3~%~d ~d~%255~%" image-width image-height)
-       (loop for j from (- image-height 1) downto 0
-             do (loop for i from 0 below image-width
-                      do (let* ((u (/ i (- image-width 1)))
-                                (v (/ j (- image-height 1)))
-                                (direction (v- (v+ (v+ lower-left-corner (v* u horizontal)) (v* v vertical)) origin))
-                                (r (make-instance 'ray :origin origin :direction direction))
-                                (pixel-color (ray-color r world)))
-                           (write-pixel-color output pixel-color))))))))
+      (format output "P3~%~d ~d~%255~%" image-width image-height)
+      (loop for j from (- image-height 1) downto 0
+            do (loop for i from 0 below image-width
+                    do (let* ((u (/ i (- image-width 1)))
+                              (v (/ j (- image-height 1)))
+                              (direction (v- (v+ (v+ lower-left-corner (v* u horizontal)) (v* v vertical)) origin))
+                              (r (make-instance 'ray :origin origin :direction direction))
+                              (pixel-color (ray-color r world)))
+                         (write-pixel-color output pixel-color)))))))
