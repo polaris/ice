@@ -6,7 +6,7 @@
 
 (defgeneric hit (obj r t-min t-max))
 
-(defmethod hit (list-of-objects (r ray) (t-min number) (t-max number))
+(defmethod hit ((list-of-objects cons) (r ray) (t-min number) (t-max number))
   (let ((closest-so-far t-max)
         (rec nil))
     (dolist (item list-of-objects)
