@@ -21,7 +21,7 @@
          (origin (vec 0 0 0))
          (horizontal (vec viewport-width 0 0))
          (vertical (vec 0 viewport-height 0))
-         (lower-left-corner (v- (v- (v- origin (v/ horizontal 2)) (v/ vertical 2)) (vec 0 0 focal-length))))
+         (lower-left-corner (v- origin (v/ horizontal 2) (v/ vertical 2) (vec 0 0 focal-length))))
     (with-open-file (output filename
                             :direction :output
                             :if-does-not-exist :create
