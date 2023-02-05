@@ -12,11 +12,10 @@
 	-1
 	(/ (- (- half-b) (sqrt discriminant)) a))))
 
-(defun ray-color (r)
-  (let ((tt (hit-sphere (3d-vectors:vec 0 0 -1) 0.5 r)))
-    (if (> tt 0.0)
-	(let ((n (3d-vectors:vunit (3d-vectors:v- (at r tt) (3d-vectors:vec 0 0 -1)))))
-	  (3d-vectors:v* 0.5 (3d-vectors:v+ n (3d-vectors:vec 1 1 1))))
+(defun ray-color (r world)
+  (let ((rec (hit world r 0 100000)))
+    (if (not (eq rec nil))
+	(3d-vectors:v* 0.5 (3d-vectors:v+ (hit-record-normal rec) (3d-vectors:vec 1 1 1)))
 	(let* ((unit-direction (3d-vectors:vunit (get-direction r)))
 	       (tt (* 0.5 (+ (3d-vectors:vy unit-direction) 1))))
 	  (3d-vectors:v+ (3d-vectors:v* (- 1.0 tt) (3d-vectors:vec 1 1 1)) (3d-vectors:v* tt (3d-vectors:vec 0.5 0.7 1.0)))))))
@@ -24,6 +23,7 @@
 (defun render (filename image-width)
   (let* ((aspect-ratio (/ 16.0 9.0))
 	 (image-height (floor (/ image-width aspect-ratio)))
+	 (world (list (make-instance 'sphere :center (3d-vectors:vec 0 0 -1) :radius 0.5)))
 	 (viewport-height 2.0)
 	 (viewport-width (* aspect-ratio viewport-height))
 	 (focal-length 1.0)
@@ -45,5 +45,5 @@
 				 (direction
 				   (3d-vectors:v- (3d-vectors:v+ (3d-vectors:v+ lower-left-corner (3d-vectors:v* u horizontal)) (3d-vectors:v* v vertical)) origin))
 				 (r (make-instance 'ray :origin origin :direction direction))
-				 (pixel-color (ray-color r)))
+				 (pixel-color (ray-color r world)))
 			    (write-pixel-color output pixel-color))))))))
