@@ -3,7 +3,7 @@
 (in-package #:ice)
 
 (defun ray-color (r world)
-  (let ((rec (hit world r 0 100000)))
+  (let ((rec (hit world r 0 infinity)))
     (if (not (eq rec nil))
         (v* 0.5 (v+ (hit-record-normal rec) (vec 1 1 1)))
         (let* ((unit-direction (vunit (get-direction r)))
