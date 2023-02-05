@@ -12,11 +12,11 @@
        (clamp (sqrt (vx pixel-color)) 0.0 0.999)))
 
 (defun calculate-pixel-color (pixel-color samples-per-pixel)
-  (let ((corrected-pixel-color (gamma-correct (downscale-pixel-color pixel-color samples-per-pixel))))
-    (let ((r (floor (* 255.999 (vx corrected-pixel-color))))
-          (g (floor (* 255.999 (vy corrected-pixel-color))))
-          (b (floor (* 255.999 (vz corrected-pixel-color)))))
-      (vec r g b))))
+  (let* ((corrected-pixel-color (gamma-correct (downscale-pixel-color pixel-color samples-per-pixel)))
+         (r (floor (* 255.999 (vx corrected-pixel-color))))
+         (g (floor (* 255.999 (vy corrected-pixel-color))))
+         (b (floor (* 255.999 (vz corrected-pixel-color)))))
+    (vec r g b))))
 
 (defun write-pixel-color (out pixel-color)
   (let ((ir (floor (* 255.999 (vx pixel-color))))
