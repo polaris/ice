@@ -12,6 +12,7 @@
                (:file "ice")
 	       (:file "color")
 	       (:file "ray")
+	       (:file "hittable")
 	       (:file "helper"))
   :in-order-to ((test-op (test-op "ice/tests"))))
 
