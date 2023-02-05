@@ -14,12 +14,11 @@
 
 (defun clamp (x min max)
   (cond ((< x min) min)
-	((> x max) max)
-	(t x)))
+        ((> x max) max)
+        (t x)))
 
 (defun vec-near-zero (v)
   (let ((s near-zero))
-    (and (< (abs (3d-vectors:vx v)) s)
-	 (< (abs (3d-vectors:vy v)) s)
-	 (< (abs (3d-vectors:vz v)) s))))
-
+    (and (< (abs (vx v)) s)
+         (< (abs (vy v)) s)
+         (< (abs (vz v)) s))))

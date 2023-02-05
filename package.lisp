@@ -1,5 +1,6 @@
 ;;;; package.lisp
 
 (defpackage #:ice
-  (:use #:cl)
+  (:use #:cl
+        #:3d-vectors)
   (:export #:render))
