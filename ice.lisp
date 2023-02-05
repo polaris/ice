@@ -2,16 +2,6 @@
 
 (in-package #:ice)
 
-(defun hit-sphere (center radius r)
-  (let* ((oc (v- (get-origin r) center))
-         (a (vsqrlength (get-direction r)))
-         (half-b (v. oc (get-direction r)))
-         (c (- (vsqrlength oc) (* radius radius)))
-         (discriminant (- (* half-b half-b) (* a c))))
-    (if (< discriminant 0)
-        -1
-        (/ (- (- half-b) (sqrt discriminant)) a))))
-
 (defun ray-color (r world)
   (let ((rec (hit world r 0 100000)))
     (if (not (eq rec nil))
