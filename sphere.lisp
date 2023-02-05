@@ -31,8 +31,8 @@
         (let ((root (calc-root discriminant half-b a t-min t-max)))
           (if (eq root nil)
               nil
-              (let* ((p (at r root))
-                     (outward-normal (v/ (v- p (get-center s)) (get-radius s)))
+              (let* ((point (at r root))
+                     (outward-normal (v/ (v- point (get-center s)) (get-radius s)))
                      (front-face (< (v. (get-direction r) outward-normal) 0))
                      (normal (if front-face outward-normal (v- outward-normal))))
-                (make-hit-record :point p :normal normal :tt root :front-face front-face)))))))
+                (make-hit-record :point point :normal normal :tt root :front-face front-face)))))))
