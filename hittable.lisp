@@ -4,8 +4,6 @@
 
 (defstruct (hit-record) point normal tt front-face)
 
-(defgeneric hit (obj r t-min t-max))
-
 (defmethod hit ((world cons) (r ray) (t-min number) (t-max number))
   (let ((closest-so-far t-max)
         (rec nil))
