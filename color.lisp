@@ -1,3 +1,5 @@
+;;;; color.lisp
+
 (in-package #:ice)
 
 (defun downscale-pixel-color (pixel-color samples-per-pixel)
