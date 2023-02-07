@@ -1,12 +1,14 @@
 # ice
 
-Usage:
+Ray Tracing in One Weekend in Common Lisp
+
+## Usage
 
 ```
 (ice:render filename image-width)
 ```
 
-Example:
+## Example
 
 ```
 (asdf:load-system "ice")
