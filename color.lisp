@@ -21,7 +21,4 @@
     (vec r g b)))
 
 (defun write-pixel-color (out pixel-color)
-  (let ((ir (floor (* 255.999 (vx pixel-color))))
-        (ig (floor (* 255.999 (vy pixel-color))))
-        (ib (floor (* 255.999 (vz pixel-color)))))
-    (format out "~d ~d ~d~%" ir ig ib)))
+  (format out "~d ~d ~d~%" (floor (vx pixel-color)) (floor (vy pixel-color)) (floor (vz pixel-color))))
