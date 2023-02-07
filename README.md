@@ -1,6 +1,6 @@
 # ice
 
-Ray Tracing in One Weekend in Common Lisp
+Ray Tracing in One Weekend written in Common Lisp
 
 ## Usage
 
