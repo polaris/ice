@@ -10,27 +10,27 @@
                (tt (* 0.5 (1+ (vy unit-direction)))))
           (v+ (v* (- 1.0 tt) (vec 1 1 1)) (v* tt (vec 0.5 0.7 1.0)))))))
 
-(defun shoot-ray (i j image-width image-height lower-left-corner horizontal vertical origin world)
-  (let* ((u (/ i (1- image-width)))
-         (v (/ j (1- image-height)))
-         (direction (v- (v+ lower-left-corner (v* u horizontal) (v* v vertical)) origin))
-         (r (make-instance 'ray :origin origin :direction direction)))
+(defun shoot-ray (cam world i j image-width image-height)
+  (let* ((u (/ (+ i (random-double)) (1- image-width)))
+         (v (/ (+ j (random-double)) (1- image-height)))
+         (r (get-ray cam u v)))
     (ray-color r world)))
+
+(defun render-pixel (output cam world i j image-width image-height samples-per-pixel)
+  (let ((pixel-color (vec 0 0 0)))
+    (loop repeat samples-per-pixel do
+      (nv+ pixel-color (shoot-ray cam world i j image-width image-height)))
+    (write-pixel-color output (calculate-pixel-color pixel-color samples-per-pixel))))
 
 (defun render-internal (output image-width world)
   (let* ((aspect-ratio (/ 16.0 9.0))
          (image-height (floor image-width aspect-ratio))
-         (viewport-height 2.0)
-         (viewport-width (* aspect-ratio viewport-height))
-         (focal-length 1.0)
-         (origin (vec 0 0 0))
-         (horizontal (vec viewport-width 0 0))
-         (vertical (vec 0 viewport-height 0))
-         (lower-left-corner (v- origin (v/ horizontal 2) (v/ vertical 2) (vec 0 0 focal-length))))
+	 (samples-per-pixel 100)
+	 (cam (make-camera)))
     (format output "P3~%~d ~d~%255~%" image-width image-height)
     (loop for j from (1- image-height) downto 0 do
       (loop for i from 0 below image-width do
-        (write-pixel-color output (shoot-ray i j image-width image-height lower-left-corner horizontal vertical origin world))))))
+	(render-pixel output cam world i j image-width image-height samples-per-pixel)))))
 
 (defun render (filename image-width)
   (with-open-file (output filename
