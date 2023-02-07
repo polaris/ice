@@ -10,8 +10,8 @@
 
 (defun gamma-correct (pixel-color)
   (vec (clamp (sqrt (vx pixel-color)) 0.0 0.999)
-       (clamp (sqrt (vx pixel-color)) 0.0 0.999)
-       (clamp (sqrt (vx pixel-color)) 0.0 0.999)))
+       (clamp (sqrt (vy pixel-color)) 0.0 0.999)
+       (clamp (sqrt (vz pixel-color)) 0.0 0.999)))
 
 (defun calculate-pixel-color (pixel-color samples-per-pixel)
   (let* ((corrected-pixel-color (gamma-correct (downscale-pixel-color pixel-color samples-per-pixel)))
