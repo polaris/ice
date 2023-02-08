@@ -19,18 +19,18 @@
 (defun render-pixel (output cam world i j image-width image-height samples-per-pixel)
   (let ((pixel-color (vec 0 0 0)))
     (loop repeat samples-per-pixel do
-      (nv+ pixel-color (shoot-ray cam world i j image-width image-height)))
+            (nv+ pixel-color (shoot-ray cam world i j image-width image-height)))
     (write-pixel-color output (calculate-pixel-color pixel-color samples-per-pixel))))
 
 (defun render-internal (output image-width world)
   (let* ((aspect-ratio (/ 16.0 9.0))
          (image-height (floor image-width aspect-ratio))
-	 (samples-per-pixel 100)
-	 (cam (make-camera)))
+         (samples-per-pixel 100)
+         (cam (make-camera)))
     (format output "P3~%~d ~d~%255~%" image-width image-height)
     (loop for j from (1- image-height) downto 0 do
-      (loop for i from 0 below image-width do
-	(render-pixel output cam world i j image-width image-height samples-per-pixel)))))
+            (loop for i from 0 below image-width do
+                    (render-pixel output cam world i j image-width image-height samples-per-pixel)))))
 
 (defun render (filename image-width)
   (with-open-file (output filename

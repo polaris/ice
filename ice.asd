@@ -10,7 +10,7 @@
                #:fiveam)
   :components ((:file "package")
                (:file "ice")
-	       (:file "camera")
+               (:file "camera")
                (:file "color")
                (:file "ray")
                (:file "sphere")
