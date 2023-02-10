@@ -9,13 +9,13 @@
   :depends-on (#:3d-vectors
                #:fiveam)
   :components ((:file "package")
-               (:file "ice")
+               (:file "helper")
                (:file "camera")
                (:file "color")
                (:file "ray")
                (:file "sphere")
                (:file "hittable")
-               (:file "helper"))
+               (:file "ice"))
   :in-order-to ((test-op (test-op "ice/tests"))))
 
 (asdf:defsystem #:ice/tests
