@@ -14,6 +14,18 @@
 (defun random-double-min-max (min max)
   (+ min (* (- max min) (random-double))))
 
+(defun random-vec ()
+  (vec (random-double) (random-double) (random-double)))
+
+(defun random-vec-min-max (min max)
+  (vec (random-double-min-max min max) (random-double-min-max min max) (random-double-min-max min max)))
+
+(defun random-in-unit-sphere ()
+  (let ((p (random-vec-min-max -1 1)))
+    (loop while (> (vsqrlength p) 1)
+	  do (setf p (random-vec-min-max -1 1)))
+    p))
+
 (defun clamp (x min max)
   (cond ((< x min) min)
         ((> x max) max)
