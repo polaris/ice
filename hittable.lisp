@@ -5,6 +5,7 @@
 (defstruct (hit-record) point normal tt front-face)
 
 (defmethod hit ((world cons) (r ray) (t-min number) (t-max number))
+  (declare (optimize (speed 3) (safety 0)))
   (let ((closest-so-far t-max)
         (rec nil))
     (dolist (object world)

@@ -2,13 +2,14 @@
 
 (in-package #:ice)
 
-(defconstant infinity 18446744073709551616)
+(defconstant infinity most-positive-fixnum)
 
 (defconstant near-zero 0.00000001)
 
 (defun degrees-to-radians (degrees)
   (/ (* degrees PI) 180))
 
+(declaim (ftype (function () single-float) random-double))
 (defun random-double () (random 1.0))
 
 (defun random-double-min-max (min max)
