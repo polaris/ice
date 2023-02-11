@@ -25,6 +25,7 @@
                         :serial t
                         :components ((:file "package")
                                      (:file "main")
+                                     (:file "helper")
                                      (:file "ray")
                                      (:file "color"))))
   :perform (test-op (o c)
