@@ -27,6 +27,13 @@
          (is (and (<= s 10)
                   (>= s 0))))))
 
+(test test-random-vec
+  (loop repeat 1000
+        do (let ((v (ice::random-vec)))
+             (is (<= (vx v) 1))
+             (is (<= (vy v) 1))
+             (is (<= (vz v) 1)))))
+
 (test test-random-in-unit-sphere
   (loop repeat 1000
         do (is (< (vsqrlength (ice::random-in-unit-sphere)) 1))))
