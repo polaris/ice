@@ -31,9 +31,10 @@
       :vertical vertical)))
 
 (defmethod get-ray ((c camera) (u number) (v number))
+  (declare (optimize (speed 3) (safety 0)))
   (let ((direction (v-
-                    (v+ (get-lower-left-corner c)
-                        (v* u (get-horizontal c))
-                        (v* v (get-vertical c)))
-                    (get-origin c))))
+                       (v+ (get-lower-left-corner c)
+                         (v* u (get-horizontal c))
+                         (v* v (get-vertical c)))
+                     (get-origin c))))
     (make-instance 'ray :origin (get-origin c) :direction direction)))
