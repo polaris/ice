@@ -24,7 +24,7 @@
 (defun random-in-unit-sphere ()
   (let ((p (random-vec-min-max -1 1)))
     (loop while (> (vsqrlength p) 1)
-	  do (setf p (random-vec-min-max -1 1)))
+          do (setf p (random-vec-min-max -1 1)))
     p))
 
 (defun clamp (x min max)
