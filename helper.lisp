@@ -2,7 +2,7 @@
 
 (in-package #:ice)
 
-(defconstant infinity most-positive-fixnum)
+(defconstant infinity most-positive-single-float)
 
 (defconstant near-zero 0.00000001)
 
